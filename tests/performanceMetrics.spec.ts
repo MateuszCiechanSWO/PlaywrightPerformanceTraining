@@ -13,7 +13,7 @@ test.describe('Get metrics from entering workspaces', () => {
         await session.send("Performance.enable");
         console.log("=============CDP Performance Metrics===============");
         await leftPane.workspacesButton.click();
-        let performanceMetrics = await session.send("Performance.getMetrics");
+        const performanceMetrics = await session.send("Performance.getMetrics");
         console.log(performanceMetrics.metrics);
     });
 });

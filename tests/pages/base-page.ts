@@ -1,6 +1,8 @@
 import {Locator, type Page} from "@playwright/test";
 
-export abstract class BasePage {
+export abstract class BasePage     
+
+{
     readonly page: Page;
     readonly url: string;
 
@@ -9,7 +11,10 @@ export abstract class BasePage {
         this.url = url;
     }
 
-    async navigateToURL(waitForPageLoad = false): Promise<void> {
+    async navigateToURL(waitForPageLoad = false): Promise<void> 
+    
+    
+    {
         await this.page.goto(this.url, {waitUntil: "domcontentloaded"});
         if (waitForPageLoad) {
             await this.waitForLoadEvent();
