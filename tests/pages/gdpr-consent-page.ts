@@ -22,5 +22,4 @@ export class GDPRConsent extends BasePage {
   get skipButton(): Locator {
     return this.page.getByText("Continue without acceptance");
   }
-
 }

@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "plugin:playwright/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+    "prettier"
+  ],
+  "rules": {
+  }
+}
