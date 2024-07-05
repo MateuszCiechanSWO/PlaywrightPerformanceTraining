@@ -2,9 +2,8 @@ import test from "./fixtures/fixture";
 
 test.describe('Get metrics from entering workspaces', () => {
 
-    test.beforeEach(async ({ page, gdprConsent }) => {
+    test.beforeEach(async ({ page }) => {
         await page.goto("https://kumo-test.com/workspaces");
-        await gdprConsent.acceptButton.click();
     });
 
     test('Get performance metrics', async ({ page, leftPane }) => {

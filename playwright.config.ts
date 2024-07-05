@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import path from "path";
 
+export const STORAGE_STATE = path.join(__dirname, 'login.json');
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -39,7 +41,7 @@ export default defineConfig({
     },
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'], storageState: STORAGE_STATE },
       dependencies: ['setup'],
     },
 

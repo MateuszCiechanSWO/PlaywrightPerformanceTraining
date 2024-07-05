@@ -3,9 +3,8 @@ import test from "./fixtures/fixture";
 
 test.describe('Get metrics from entering workspaces', () => {
 
-    test.beforeEach(async ({ page, gdprConsent }) => {
+    test.beforeEach(async ({ page }) => {
         await page.goto("https://kumo-test.com/");
-        await gdprConsent.acceptButton.click();
     });
 
     test('Check workspaces navigation time', async ({ page }) => {
