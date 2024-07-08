@@ -22,7 +22,7 @@ test.describe('Get metrics from entering workspaces', () => {
         await expect(logoResourceTiming.duration).toBeLessThan(2000);
     });
 
-    test('Check workspaces paint time', async ({ page }) => {
+    test('Check workspaces first paint time', async ({ page }) => {
         await page.goto("https://kumo-test.com/workspaces");
         const paintTiming = JSON.parse(await page.evaluate(() => 
             JSON.stringify(performance.getEntriesByType("paint"))));
@@ -32,5 +32,24 @@ test.describe('Get metrics from entering workspaces', () => {
         const firstContentfulPaintTiming: number = paintTiming[1].startTime;
         console.log(`The time to load ${paintTiming[1].name} was ${firstContentfulPaintTiming.toFixed(2)} ms`);
         await expect (firstContentfulPaintTiming).toBeLessThan(2000);
+    });
+
+    test('Check workspaces largest contentful paint time', async ({ page }) => {
+        await page.goto("https://kumo-test.com/workspaces");
+        const largestContentfulPaint:number = await page.evaluate(() => {
+            return new Promise((resolve) => {
+                new PerformanceObserver((l) => {
+                    const entries = l.getEntries();
+                    // the last entry is the largest contentful paint
+                    const largestPaintEntry = entries.at(-1);
+                    resolve((largestPaintEntry as PerformanceEntry).startTime);
+                })
+                .observe({
+                    type: 'largest-contentful-paint',
+                    buffered: true
+                });
+            });
+        });
+        console.log("Largest contentful paint was rendered in " + largestContentfulPaint.toFixed(2) + "ms");
     });
 });
