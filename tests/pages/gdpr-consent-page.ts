@@ -1,7 +1,10 @@
 import { BasePage } from "./base-page";
-import { Locator } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export class GDPRConsent extends BasePage {
+  constructor(page: Page) {
+    super(page, "");
+  }
 
   get modalContainer(): Locator {
     return this.page.locator("div.ku-modal-container");
